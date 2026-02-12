@@ -17,3 +17,8 @@ export const sanityWebhookPayloadSchema = z.object({
     }),
   ),
 });
+
+export const newsletterFormSchemas = z.object({
+  name: z.string().min(5, 'Name must have at least 5 characters'),
+  email: z.email(),
+});
