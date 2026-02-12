@@ -26,8 +26,10 @@
 ## Project Timeline
 
 - 2/11/2026 => Project Research, Project Setup
-- 2/12/2026 => CMS setup, Database Setup, seed & sync data from CMS to DB,
+- 2/12/2026 => CMS setup, Database Setup, seed & sync data from CMS to DB, Development
 
 ---
 
 ## Features
+
+- user can search any products, blogs by typing in search box on the page

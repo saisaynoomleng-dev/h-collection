@@ -1,14 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { Input } from '../ui/input';
 import { CiGift, CiShoppingBasket } from 'react-icons/ci';
 import BrandLogo from '../BrandLogo';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
-import Form from 'next/form';
 import { Button } from '../ui/button';
-import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
@@ -35,20 +32,20 @@ const MainHeader = () => {
   }, [navOpen]);
 
   return (
-    <header className="px-3 md:px-5  lg:max-w-300 lg:mx-auto py-5 font-jost">
-      {/* desktop nav */}
+    <header className="px-3 md:px-5 lg:max-w-300 lg:mx-auto py-5 font-jost">
+      {/* desktop view */}
       <div className="flex-col hidden md:flex gap-y-6">
         <div className="flex justify-between items-center">
           <SearchBar />
 
           <div className="flex items-center gap-x-3">
-            <Link href="/user">User</Link>
             <Link href="/buy-gift-card">
               <CiGift className="size-6" />
             </Link>
             <Link href="/cart">
               <CiShoppingBasket className="size-6" />
             </Link>
+            <Link href="/user">User</Link>
           </div>
         </div>
         <div className="self-center">
@@ -78,7 +75,7 @@ const MainHeader = () => {
         <div className="divider"></div>
       </div>
 
-      {/* mobile nav */}
+      {/* mobile view */}
       <div className="flex flex-col md:hidden gap-y-5">
         <SearchBar />
 
