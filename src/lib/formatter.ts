@@ -1,5 +1,8 @@
 export const formatTitle = (title: string) => {
-  return `${title.slice(0, 1).toUpperCase()}${title.slice(1)}`;
+  return title
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
 };
 
 export const formatPrice = (price: number) => {

@@ -20,23 +20,34 @@ export const productBrandType = defineType({
       type: 'slug',
       validation: (rule) => rule.required(),
       options: {
-        source: 'name',
-        maxLength: 200,
+        source: (doc, context) =>
+          context.dataset === 'production'
+            ? `${doc.name}-product-brand`
+            : `${doc.name}`,
+        slugify: (input) =>
+          input.toLowerCase().replace(/\s+/g, '-').slice(0, 200),
       },
+    }),
+    defineField({
+      name: 'mainImage',
+      title: 'Brand Logo',
+      type: 'blockImage',
+      validation: (rule) => rule.required(),
     }),
   ],
   preview: {
     select: {
       name: 'name',
+      image: 'mainImage',
     },
-    prepare({ name }) {
+    prepare({ name, image }) {
       const nameFormatted = name
         ? formatTitle(name)
         : 'Color name not provided';
 
       return {
         title: nameFormatted,
-        media: SiNike,
+        media: image || SiNike,
       };
     },
   },
