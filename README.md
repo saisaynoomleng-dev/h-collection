@@ -26,6 +26,7 @@
 ## Project Timeline
 
 - 2/11/2026 => Project Research, Project Setup
+- 2/12/2026 => CMS setup, Database Setup
 
 ---
 
