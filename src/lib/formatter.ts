@@ -13,7 +13,7 @@ export const formatPrice = (price: number) => {
 };
 
 export const formatDate = (date: string) => {
-  return new Date().toLocaleDateString('en-US', {
+  return new Date(date).toLocaleDateString('en-US', {
     day: '2-digit',
     month: 'short',
     year: 'numeric',

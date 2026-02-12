@@ -176,3 +176,7 @@
 @utility form-label {
   @apply after:absolute after:content-["*"] after:ml-0.5 block after:text-red-500;
 }
+
+@utility divider {
+  @apply w-[80%] h-px bg-brand-black/20 mx-auto;
+}

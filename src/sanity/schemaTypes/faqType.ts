@@ -1,6 +1,6 @@
 import { formatTitle } from '@/lib/formatter';
 import { MdOutlineQuestionMark } from 'react-icons/md';
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
 export const faqType = defineType({
   name: 'faq',
