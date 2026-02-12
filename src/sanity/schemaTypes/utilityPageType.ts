@@ -18,7 +18,7 @@ export const utilityPageType = defineType({
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'name',
+        source: (doc) => `${doc.name}-utility-page`,
         maxLength: 200,
       },
       validation: (rule) => rule.required(),

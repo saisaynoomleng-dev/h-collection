@@ -19,7 +19,10 @@ export const faqType = defineType({
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'name',
+        source: (doc, context) =>
+          context.dataset === 'production' ? `${doc.name}-faqs` : `${doc.name}`,
+        slugify: (input) =>
+          input.toLowerCase().replace(/\s+/g, '-').slice(0, 200),
       },
       validation: (rule) => rule.required(),
     }),
@@ -28,18 +31,23 @@ export const faqType = defineType({
       title: 'FAQs',
       type: 'array',
       of: [
-        defineArrayMember({
-          name: 'question',
-          title: 'Question',
-          type: 'string',
-          validation: (rule) => rule.required(),
-        }),
-        defineArrayMember({
-          name: 'answer',
-          title: 'Answer',
-          type: 'string',
-          validation: (rule) => rule.required(),
-        }),
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'question',
+              title: 'Question',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'answer',
+              title: 'Answer',
+              type: 'text',
+              validation: (rule) => rule.required(),
+            }),
+          ],
+        },
       ],
       validation: (rule) => rule.required(),
     }),

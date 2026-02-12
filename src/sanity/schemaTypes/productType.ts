@@ -65,17 +65,16 @@ export const productType = defineType({
 
     defineField({
       name: 'availableColor',
-      title: 'Product Colors',
+      title: 'Available Colors',
       type: 'array',
-      of: [{ type: 'productColor' }],
+      of: [{ type: 'reference', to: [{ type: 'productColor' }] }],
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'availableSize',
       title: 'Available Sizes',
       type: 'array',
-      of: [{ type: 'productSize' }],
-      validation: (rule) => rule.required(),
+      of: [{ type: 'reference', to: [{ type: 'productSize' }] }],
     }),
     defineField({
       name: 'brand',
@@ -84,16 +83,22 @@ export const productType = defineType({
       to: [{ type: 'productBrand' }],
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'numberInStock',
+      title: 'Number In Stock',
+      type: 'number',
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {
       name: 'name',
       price: 'price',
-      brand: 'brand',
+      brand: 'brand.name',
       image: 'mainImages.0.asset',
     },
     prepare({ name, price, brand, image }) {
-      const nameFormatted = name ? formatTitle(name) : 'Name not provided';
+      const nameFormatted = formatTitle(name) || 'name not provided';
       const priceFormatted = price ? formatPrice(price) : 'Price not provided';
       const brandFormatted = brand ? formatTitle(brand) : 'Brand not provided';
 
