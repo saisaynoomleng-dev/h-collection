@@ -34,6 +34,12 @@ export const blogAuthorType = defineType({
       type: 'blockImage',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'body',
+      title: 'Author Bio',
+      type: 'blockContent',
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {

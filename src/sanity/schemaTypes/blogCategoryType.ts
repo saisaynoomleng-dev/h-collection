@@ -28,11 +28,6 @@ export const blogCategoryType = defineType({
       },
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'body',
-      title: 'Description',
-      type: 'text',
-    }),
   ],
   preview: {
     select: {

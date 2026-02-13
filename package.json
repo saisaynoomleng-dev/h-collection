@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sanity:typegen": "sanity schema extract --path=./src/sanity/extract.json && sanity typgen generate",
+    "sanity:typegen": "sanity schema extract --path=./src/sanity/extract.json && sanity typegen generate",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
   },
