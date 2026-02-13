@@ -4,6 +4,8 @@ import db from '@/db';
 import { NewsletterSubscriptionsTable } from '@/db/schema';
 import { NewsletterFormPrevStateProps } from '@/types/types';
 import { newsletterFormSchemas } from '@/types/validations';
+import NewsletterEmailTemplate from '@/components/features/newsletterEmailTemplate';
+import resend from '@/emails';
 
 export const handleNewsletterForm = async (
   prevState: NewsletterFormPrevStateProps,
@@ -36,6 +38,19 @@ export const handleNewsletterForm = async (
         email,
       })
       .onConflictDoNothing({ target: NewsletterSubscriptionsTable.email });
+
+    const emailRes = await resend.emails.send({
+      from: 'H Collection <noreply@contact.snoomleng.com>',
+      to: [email],
+      subject: 'Newsletter Subscription sucessfull',
+      react: NewsletterEmailTemplate({ name }),
+    });
+
+    if (emailRes.error) {
+      console.log('email Error sai sai');
+    } else {
+      console.log('email sent');
+    }
 
     return {
       status: 'success',

@@ -12,6 +12,7 @@ const SubmitButton = ({ children, className }: SubmitButtonProps) => {
   return (
     <Button
       disabled={pending}
+      variant="submit"
       type="submit"
       className={clsx('cursor-pointer', className)}
     >
