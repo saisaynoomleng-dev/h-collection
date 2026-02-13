@@ -7,10 +7,12 @@ export const env = createEnv({
     NEXT_PUBLIC_SANITY_PROJECT_ID: z.string(),
     NEXT_PUBLIC_BASE_URL: z.string(),
     NEXT_PUBLIC_SANITY_DATASET: z.string(),
+    NEXT_PUBLIC_REACT_MAP_GL_TOKEN: z.string(),
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    NEXT_PUBLIC_REACT_MAP_GL_TOKEN: process.env.NEXT_PUBLIC_REACT_MAP_GL_TOKEN,
   },
 });

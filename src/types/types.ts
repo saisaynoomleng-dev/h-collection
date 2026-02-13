@@ -1,6 +1,6 @@
 import {
   ALL_BLOGS_QUERYResult,
-  ALL_PRODUCT_QUERIESResult,
+  ALL_PRODUCTS_QUERYResult,
 } from '@/sanity/types';
 
 // Newsletter Form Previous Props
@@ -18,7 +18,7 @@ export type SubmitButtonProps = {
 
 // Bounded
 export type BoundedProps = {
-  as: React.ElementType;
+  as?: React.ElementType;
   children: React.ReactNode;
   className?: string;
   isPadded: boolean;
@@ -37,8 +37,9 @@ export type BannerProps = {
 };
 
 // Product Cards
-export type ProductCardProps =
-  NonNullable<ALL_PRODUCT_QUERIESResult>[number] & { className?: string };
+export type ProductCardProps = NonNullable<ALL_PRODUCTS_QUERYResult>[number] & {
+  className?: string;
+};
 
 // Sanity Image
 export type SanityImageProps = {
@@ -52,4 +53,16 @@ export type SanityImageProps = {
 // Blog Card
 export type BlogCardProps = NonNullable<ALL_BLOGS_QUERYResult>[number] & {
   className?: string;
+};
+
+// Contact Form Prev
+export type ContactFormPrevStateProps = {
+  status: string;
+  message: string;
+  field?: string;
+};
+
+// Newsletter email template
+export type NewsletterEmailTemplateProps = {
+  name: string;
 };
