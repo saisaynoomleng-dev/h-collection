@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import SearchBar from './SearchBar';
+import { useUser } from '@clerk/nextjs';
+import Image from 'next/image';
 
 const NAV_LINKS = [
   { name: 'Shop', url: '/shop' },
@@ -22,6 +24,7 @@ const NAV_LINKS = [
 const MainHeader = () => {
   const pathname = usePathname();
   const [navOpen, setNavOpen] = useState<boolean>(false);
+  const { isSignedIn, user } = useUser();
 
   useEffect(() => {
     document.body.style.overflow = navOpen ? 'hidden' : 'auto';
@@ -45,7 +48,20 @@ const MainHeader = () => {
             <Link href="/cart">
               <CiShoppingBasket className="size-6" />
             </Link>
-            <Link href="/user">User</Link>
+            {isSignedIn ? (
+              <Link href="/user">
+                <Image
+                  src={user.imageUrl}
+                  alt={`${user.firstName}'s photo` || ''}
+                  loading="lazy"
+                  width={30}
+                  height={30}
+                  className="rounded-full"
+                />
+              </Link>
+            ) : (
+              <Link href="/sign-in">Sign In</Link>
+            )}
           </div>
         </div>
         <div className="self-center">
@@ -125,9 +141,22 @@ const MainHeader = () => {
                 {link.name}
               </Link>
             ))}
-            <Link href="/user" onClick={() => setNavOpen(false)}>
-              User
-            </Link>
+            {isSignedIn ? (
+              <Link href="/user" onClick={() => setNavOpen(false)}>
+                <Image
+                  src={user.imageUrl}
+                  alt={`${user.firstName}'s photo` || ''}
+                  loading="lazy"
+                  width={30}
+                  height={30}
+                  className="rounded-full"
+                />
+              </Link>
+            ) : (
+              <Link href="/sign-in" onClick={() => setNavOpen(false)}>
+                Sign In
+              </Link>
+            )}
           </nav>
         </div>
       </div>

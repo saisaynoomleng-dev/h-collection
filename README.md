@@ -20,6 +20,7 @@
 - Resend(Email)
 - React Map GL(Mapbox)
 - GSAP(animation)
+- React Email
 
 ---
 
