@@ -89,6 +89,12 @@ export const productType = defineType({
       type: 'number',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'body',
+      title: 'Product Description',
+      type: 'blockContent',
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {

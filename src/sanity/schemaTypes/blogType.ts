@@ -29,8 +29,8 @@ export const blogType = defineType({
       options: {
         source: (doc, context) =>
           context.dataset === 'production'
-            ? `${doc.name}-${doc.publishedAt}`
-            : `${doc.name}`,
+            ? `${doc.title}-${doc.publishedAt}`
+            : `${doc.title}`,
         slugify: (input) =>
           input.toLowerCase().replace(/\s+/g, '-').slice(0, 200),
       },

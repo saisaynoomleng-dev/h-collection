@@ -19,3 +19,19 @@ export const formatDate = (date: string) => {
     year: 'numeric',
   });
 };
+
+export const formatDateTime = (datetime: string) => {
+  return new Date(datetime).toLocaleDateString('en-US', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+};
+
+export const formatDiscount = (discount: number, total: number) => {
+  const newTotal = total - (total * discount) / 100;
+  return formatPrice(newTotal);
+};

@@ -152,7 +152,7 @@
   }
 
   body {
-    @apply text-fs-400 bg-brand-white overflow-x-hidden leading-normal tracking-normal text-brand-black font-inter;
+    @apply text-fs-400 bg-brand-white overflow-x-hidden leading-normal tracking-normal text-brand-black font-jost;
   }
 
   h1,
@@ -179,4 +179,8 @@
 
 @utility divider {
   @apply w-[80%] h-px bg-brand-black/20 mx-auto;
+}
+
+@utility my-container {
+  @apply lg:max-w-300 lg:mx-auto;
 }
