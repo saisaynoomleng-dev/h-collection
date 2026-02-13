@@ -42,6 +42,7 @@ export const UserTable = t.pgTable(
     clerkUserId: t.varchar('clerk_user_id', { length: 255 }).notNull().unique(),
     gender: userGender('gender'),
     imageUrl: t.varchar('image_url', { length: 255 }),
+    isActive: t.boolean().default(true),
     ...timestamp,
   },
   (table) => [t.uniqueIndex('clerk_user_id_idx').on(table.clerkUserId)],

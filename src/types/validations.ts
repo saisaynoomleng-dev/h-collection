@@ -33,3 +33,17 @@ export const contactFormSchemas = z.object({
     .string()
     .min(100, 'Message text should have at least 100 characters'),
 });
+
+export const clerkDataSchema = z.object({
+  first_name: z.string().nullable(),
+  last_name: z.string().nullable(),
+  email_addresses: z.array(
+    z.object({
+      id: z.string(),
+      email_address: z.email(),
+    }),
+  ),
+  id: z.string(),
+  image_url: z.string(),
+  primary_email_address_id: z.string(),
+});

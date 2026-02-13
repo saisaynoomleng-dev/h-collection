@@ -3,6 +3,7 @@ import './globals.css';
 import { inter, jost } from '@/lib/fonts';
 import { SanityLive } from '@/sanity/lib/live';
 import { Toaster } from 'sonner';
+import { ClerkProvider } from '@clerk/nextjs';
 
 export const metadata: Metadata = {
   title: {
@@ -18,12 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${jost.variable} ${inter.variable} antialiased`}>
-        {children}
-        <SanityLive />
-        <Toaster richColors position="top-center" closeButton />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${jost.variable} ${inter.variable} antialiased`}>
+          {children}
+          <SanityLive />
+          <Toaster richColors position="top-center" closeButton />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
