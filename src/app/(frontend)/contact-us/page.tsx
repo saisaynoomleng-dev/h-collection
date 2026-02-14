@@ -1,6 +1,7 @@
 import ContactForm from '@/components/features/ContactForm';
 import Mapbox from '@/components/features/Mapbox';
 import Bounded from '@/components/shared/Bounded';
+import PageTitle from '@/components/shared/PageTitle';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import {
@@ -32,9 +33,9 @@ const SOCIAL_LINKS = [
 const ContactUsPage = () => {
   return (
     <Bounded isPadded className="grid md:grid-cols-2 md:gap-x-3">
+      <PageTitle className="col-span-full">Get In touch</PageTitle>
       <div className="flex flex-col gap-y-3">
         <div className="flex flex-col">
-          <h2 className="font-semibold text-fs-500">Get In Touch</h2>
           <p>We&apos;re willing to work with you!</p>
           <p className="text-fs-300 italic text-brand-black/70">
             Your email address will not be published. Required fields are marked

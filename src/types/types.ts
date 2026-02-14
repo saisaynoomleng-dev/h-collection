@@ -1,5 +1,6 @@
 import {
   ALL_BLOGS_QUERYResult,
+  ALL_FAQS_QUERYResult,
   ALL_PRODUCTS_QUERYResult,
 } from '@/sanity/types';
 
@@ -65,4 +66,24 @@ export type ContactFormPrevStateProps = {
 // Newsletter email template
 export type NewsletterEmailTemplateProps = {
   name: string;
+};
+
+// Section Subtitle
+export type SectionSubtitleProps = {
+  className?: string;
+  children: React.ReactNode;
+  as?: 'h2' | 'h3' | 'h4' | 'h5';
+};
+
+// FAQcard
+export type FAQCardProps = {
+  className?: string;
+  faqs: ALL_FAQS_QUERYResult;
+};
+
+// Page Title
+export type PageTitleProps = {
+  as?: React.ElementType;
+  children: React.ReactNode;
+  className?: string;
 };

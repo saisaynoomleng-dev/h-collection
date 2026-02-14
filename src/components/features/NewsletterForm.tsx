@@ -2,10 +2,11 @@
 
 import { handleNewsletterForm } from '@/actions/newsletterForm';
 import Form from 'next/form';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { Input } from '../ui/input';
 import SubmitButton from '../shared/SubmitButton';
 import clsx from 'clsx';
+import { toast } from 'sonner';
 
 const initialFormState = {
   status: '',
@@ -18,6 +19,17 @@ const NewsletterForm = ({ className }: { className?: string }) => {
     handleNewsletterForm,
     initialFormState,
   );
+
+  useEffect(() => {
+    if (state.status === 'success') {
+      toast.success(state.message);
+    }
+
+    if (state.status === 'error') {
+      toast.error(state.message);
+    }
+  }, [state.status, state.message]);
+
   return (
     <Form
       action={actionFunction}

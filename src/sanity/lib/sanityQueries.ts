@@ -43,3 +43,13 @@ export const ALL_BLOGS_QUERY = defineQuery(`*[_type == 'blog'
   'imageAlt': mainImage.alt,
   minRead
  }`);
+
+export const ALL_FAQS_QUERY = defineQuery(`*[_type == 'faq'
+ && defined(slug.current)]{
+  name,
+  "slug": slug.current,
+  faqs[]{
+    question,
+    answer
+  }
+ }`);

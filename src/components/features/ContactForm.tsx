@@ -2,10 +2,11 @@
 
 import { handleContactForm } from '@/actions/contactForm';
 import Form from 'next/form';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import SubmitButton from '../shared/SubmitButton';
+import { toast } from 'sonner';
 
 const initialFormState = {
   status: '',
@@ -19,6 +20,16 @@ const ContactForm = () => {
     initialFormState,
   );
 
+  useEffect(() => {
+    if (state.status === 'success') {
+      toast.success(state.message);
+    }
+
+    if (state.status === 'error') {
+      toast.error(state.message);
+    }
+  }, [state.status, state.message]);
+
   return (
     <Form action={actionFunction} className="grid grid-cols-2 gap-y-3 gap-x-2">
       <div className="space-y-1">
@@ -29,7 +40,7 @@ const ContactForm = () => {
           type="text"
           id="contact-firstname"
           name="firstname"
-          autoComplete="first-name"
+          autoComplete="given-name"
           required
         />
         {state.status === 'error' && state.field === 'firstname' && (
@@ -45,7 +56,7 @@ const ContactForm = () => {
           type="text"
           id="contact-lastname"
           name="lastname"
-          autoComplete="last-name"
+          autoComplete="family-name"
           required
         />
         {state.status === 'error' && state.field === 'lastname' && (

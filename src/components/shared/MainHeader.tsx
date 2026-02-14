@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { CiGift, CiShoppingBasket } from 'react-icons/ci';
-import BrandLogo from '../BrandLogo';
+import BrandLogo from './BrandLogo';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
@@ -10,10 +10,11 @@ import { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import SearchBar from './SearchBar';
-import { useUser } from '@clerk/nextjs';
+import { SignInButton, useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 
 const NAV_LINKS = [
+  { name: 'Home', url: '/' },
   { name: 'Shop', url: '/shop' },
   { name: 'About', url: '/about-us' },
   { name: 'Journal', url: '/blog' },
@@ -35,7 +36,7 @@ const MainHeader = () => {
   }, [navOpen]);
 
   return (
-    <header className="px-3 md:px-5 lg:max-w-300 lg:mx-auto py-5 font-jost">
+    <header className="px-3 md:px-5 lg:max-w-300 lg:mx-auto py-5 font-jost max-md:shadow-md max-md:mb-5">
       {/* desktop view */}
       <div className="flex-col hidden md:flex gap-y-6">
         <div className="flex justify-between items-center">
@@ -60,7 +61,8 @@ const MainHeader = () => {
                 />
               </Link>
             ) : (
-              <Link href="/sign-in">Sign In</Link>
+              // <Link href="/sign-in">Sign In</Link>
+              <SignInButton />
             )}
           </div>
         </div>
@@ -110,7 +112,7 @@ const MainHeader = () => {
               <CiShoppingBasket className="size-6" />
             </Link>
             <Button
-              className="bg-transparent text-brand-black relative z-20"
+              className="bg-transparent text-brand-black relative z-20 hover:bg-transparent cursor-pointer"
               onClick={() => setNavOpen((prevOpen) => !prevOpen)}
               aria-controls="mobile-nav"
               aria-label={navOpen ? 'Open Main Menu' : 'Close Main Menu'}
@@ -153,9 +155,10 @@ const MainHeader = () => {
                 />
               </Link>
             ) : (
-              <Link href="/sign-in" onClick={() => setNavOpen(false)}>
-                Sign In
-              </Link>
+              // <Link href="/sign-in" onClick={() => setNavOpen(false)}>
+              //   Sign In
+              // </Link>
+              <SignInButton />
             )}
           </nav>
         </div>

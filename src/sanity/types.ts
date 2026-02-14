@@ -435,6 +435,16 @@ export type ALL_BLOGS_QUERYResult = Array<{
   imageAlt: string | null;
   minRead: number | null;
 }>;
+// Variable: ALL_FAQS_QUERY
+// Query: *[_type == 'faq' && defined(slug.current)]{  name,  "slug": slug.current,  faqs[]{    question,    answer  } }
+export type ALL_FAQS_QUERYResult = Array<{
+  name: string | null;
+  slug: string | null;
+  faqs: Array<{
+    question: string | null;
+    answer: string | null;
+  }> | null;
+}>;
 
 // Query TypeMap
 import '@sanity/client';
@@ -443,5 +453,6 @@ declare module '@sanity/client' {
     '*[_type == \'product\'\n && defined(slug.current)]{\n  name,\n  slug,\n  price,\n  "imageUrl": mainImages[0].asset -> url,\n  "imageAlt": mainImages[0].alt,\n  "colors": availableColor[]->{name},\n  discountInPercent,\n  "brand": brand->name\n }\n ': ALL_PRODUCTS_QUERYResult;
     "*[_type == 'product'\n && slug.current == $slug][0]{\n  name,\n  slug,\n  sku,\n  'category': category->name,\n  price,\n  discountInPercent,\n  'colors': availableColor[]->name,\n  'sizes': availableSize[]->name,\n  mainImages[]{\n    asset->{url},\n    alt\n  },\n  body,\n }": PRODUCT_QUERYResult;
     "*[_type == 'blog'\n && defined(slug.current)]{\n  title,\n  'slug': slug.current,\n  'author': author->name,\n  'authorImg': author->mainImage{alt, asset->{url}},\n  subtitle,\n  'category': category->name,\n  publishedAt,\n  'imageUrl': mainImage.asset->url,\n  'imageAlt': mainImage.alt,\n  minRead\n }": ALL_BLOGS_QUERYResult;
+    '*[_type == \'faq\'\n && defined(slug.current)]{\n  name,\n  "slug": slug.current,\n  faqs[]{\n    question,\n    answer\n  }\n }': ALL_FAQS_QUERYResult;
   }
 }

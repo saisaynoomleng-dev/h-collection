@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import BrandLogo from '../BrandLogo';
+import BrandLogo from './BrandLogo';
 import NewsletterForm from '../features/NewsletterForm';
 import {
   BsFacebook,
@@ -73,7 +73,7 @@ const Footer = () => {
 
           <div className="flex flex-col gap-y-5">
             <h3 className="font-semibold text-fs-500 text-center">
-              Subscribe for our Newsletter
+              Subscribe to our Newsletter
             </h3>
             <NewsletterForm />
           </div>
