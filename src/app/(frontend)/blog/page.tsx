@@ -81,7 +81,7 @@ const BlogPage = async ({
         {/* category filter */}
         <div className="space-y-3">
           <p className="font-semibold">Categories</p>
-          <div className="flex md:flex-col gap-3 max-md:items-center flex-wrap">
+          <div className="flex flex-row md:flex-col max:md:justify-center gap-3 max-md:items-center flex-wrap">
             {categories.map((c) => (
               <Button
                 asChild
@@ -150,7 +150,12 @@ const BlogPage = async ({
                     page: currentPage === 1 ? currentPage : currentPage - 1,
                   },
                 }}
-                className="flex gap-x-1 items-center"
+                className={clsx(
+                  'flex gap-x-1 items-center',
+                  currentPage === 1
+                    ? 'pointer-events-none border-brand-black/10 text-brand-black/10'
+                    : 'pointer-events-auto border-brand-black text-brand-black',
+                )}
               >
                 <span>
                   <MdKeyboardArrowLeft />
@@ -203,7 +208,12 @@ const BlogPage = async ({
                       currentPage === totalPage ? currentPage : currentPage + 1,
                   },
                 }}
-                className="flex gap-x-1 items-center"
+                className={clsx(
+                  'flex gap-x-1 items-center',
+                  currentPage === totalPage
+                    ? 'pointer-events-none border-brand-black/10 text-brand-black/10'
+                    : 'pointer-events-auto border-brand-black text-brand-black',
+                )}
               >
                 <span>Next</span>
                 <span>

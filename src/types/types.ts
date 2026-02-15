@@ -52,7 +52,9 @@ export type SanityImageProps = {
 };
 
 // Blog Card
-export type BlogCardProps = NonNullable<ALL_BLOGS_QUERYResult>[number] & {
+export type BlogCardProps = NonNullable<
+  ALL_BLOGS_QUERYResult['blogs']
+>[number] & {
   className?: string;
 };
 
@@ -84,6 +86,12 @@ export type FAQCardProps = {
 // Page Title
 export type PageTitleProps = {
   as?: React.ElementType;
+  children: React.ReactNode;
+  className?: string;
+};
+
+// Back to
+export type BackToPageProps = {
   children: React.ReactNode;
   className?: string;
 };

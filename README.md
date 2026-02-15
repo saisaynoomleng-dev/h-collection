@@ -41,3 +41,4 @@
 - user can reset password with associated email
 - user can subscribe to newsletter and get instant email reply
 - user can contact with email for franchising, wholesale order, and be a supplier
+- user can filter blogs by category

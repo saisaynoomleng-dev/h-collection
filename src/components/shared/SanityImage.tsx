@@ -17,7 +17,7 @@ const SanityImage = ({
       height={height}
       alt={imageAlt || ''}
       loading="lazy"
-      className={clsx('rounded-sm object-cover min-w-full', className)}
+      className={clsx('rounded-sm object-cover w-full', className)}
     />
   );
 };
