@@ -37,3 +37,5 @@
 ## Features
 
 - user can search any products, blogs by typing in search box on the page
+- user can create account using email and oAuth
+- user can reset password with associated email
