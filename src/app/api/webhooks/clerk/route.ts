@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
     const type = event.type;
 
-    if (type === 'user.created' || type == 'user.updated') {
+    if (type === 'user.created' || type === 'user.updated') {
       const { data } = event;
 
       const result = clerkDataSchema.safeParse(data);

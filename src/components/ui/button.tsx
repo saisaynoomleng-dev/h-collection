@@ -23,6 +23,8 @@ const buttonVariants = cva(
         submit:
           'bg-brand-black text-brand-white font-semibold hover:bg-brand-black/80',
         faq: 'border rounded-none cursor-pointer hover:bg-brand-pink/30',
+        oauth:
+          'border rounded-none hover:bg-brand-black hover:text-brand-white',
       },
       size: {
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',
