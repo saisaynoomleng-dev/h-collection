@@ -18,7 +18,7 @@ export const ProductCardSkeleton = () => {
 // blog Card
 export const BlogCardSkeleton = () => {
   return (
-    <div className="flex flex-col gap-y-3 shadow-sm w-100 h-100">
+    <div className="flex flex-col gap-y-3 shadow-sm w-75 h-100">
       <Skeleton className="w-100 h-60" />
       <div className="flex justify-between items-center">
         <div className="flex gap-x-2 items-center">

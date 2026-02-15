@@ -30,19 +30,34 @@ export const PRODUCT_QUERY = defineQuery(`*[_type == 'product'
   body,
  }`);
 
-export const ALL_BLOGS_QUERY = defineQuery(`*[_type == 'blog'
- && defined(slug.current)]{
-  title,
-  'slug': slug.current,
-  'author': author->name,
-  'authorImg': author->mainImage{alt, asset->{url}},
-  subtitle,
-  'category': category->name,
-  publishedAt,
-  'imageUrl': mainImage.asset->url,
-  'imageAlt': mainImage.alt,
-  minRead
- }`);
+export const ALL_BLOGS_QUERY = defineQuery(`
+ {
+  "blogs": *[_type == 'blog'
+            && defined(slug.current)
+            && (
+              (!defined($category))
+              ||category->slug.current == $category
+            )]
+            | order(_id)
+            [$startIndex...$endIndex]{
+              title,
+              'slug': slug.current,
+              'author': author->name,
+              'authorImg': author->mainImage{alt, asset->{url}},
+              subtitle,
+              'category': category->name,
+              publishedAt,
+              'imageUrl': mainImage.asset->url,
+              'imageAlt': mainImage.alt,
+              minRead
+             },
+  "total": count(*[_type == 'blog'
+            && defined(slug.current)
+            && (
+              (!defined($category))||
+              category->slug.current == $category
+            )])
+}`);
 
 export const ALL_FAQS_QUERY = defineQuery(`*[_type == 'faq'
  && defined(slug.current)]{
@@ -52,4 +67,10 @@ export const ALL_FAQS_QUERY = defineQuery(`*[_type == 'faq'
     question,
     answer
   }
+ }`);
+
+export const ALL_BLOG_CATEGORIES_QUERY = defineQuery(`*[_type == 'blogCategory'
+ && defined(slug.current)]{
+  name,
+  "slug" : slug.current
  }`);

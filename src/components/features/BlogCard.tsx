@@ -1,6 +1,5 @@
 import { BlogCardProps } from '@/types/types';
 import clsx from 'clsx';
-import Link from 'next/link';
 import SanityImage from '../shared/SanityImage';
 import CTA from '../shared/CTA';
 import { formatDate } from '@/lib/formatter';
@@ -21,7 +20,7 @@ const BlogCard = ({ className, ...props }: BlogCardProps) => {
   return (
     <div
       className={clsx(
-        'flex flex-col gap-y-3 p-2 shadow-sm w-100 max-h-100',
+        'flex flex-col gap-y-3 p-2 shadow-sm max-md:max-w-100 md:w-75 h-100',
         className,
       )}
     >
