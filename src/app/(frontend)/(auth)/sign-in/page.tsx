@@ -133,7 +133,7 @@ const SignInPage = () => {
 
           <div className="self-end">
             <Link
-              href="/forget-password"
+              href="/forgot-password"
               className="text-fs-300 text-brand-pink underline"
             >
               Forget password

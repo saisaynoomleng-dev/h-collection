@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import SearchBar from './SearchBar';
-import { SignInButton, useUser } from '@clerk/nextjs';
+import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 
 const NAV_LINKS = [
@@ -154,10 +154,9 @@ const MainHeader = () => {
                 />
               </Link>
             ) : (
-              // <Link href="/sign-in" onClick={() => setNavOpen(false)}>
-              //   Sign In
-              // </Link>
-              <SignInButton />
+              <Link href="/sign-in" onClick={() => setNavOpen(false)}>
+                Sign In
+              </Link>
             )}
           </nav>
         </div>
