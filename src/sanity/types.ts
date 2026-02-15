@@ -418,7 +418,7 @@ export type PRODUCT_QUERYResult = {
   body: BlockContent | null;
 } | null;
 // Variable: ALL_BLOGS_QUERY
-// Query: {  "blogs": *[_type == 'blog'            && defined(slug.current)            && (              (!defined($category))              ||category->slug.current == $category            )]            | order(_id)            [$startIndex...$endIndex]{              title,              'slug': slug.current,              'author': author->name,              'authorImg': author->mainImage{alt, asset->{url}},              subtitle,              'category': category->name,              publishedAt,              'imageUrl': mainImage.asset->url,              'imageAlt': mainImage.alt,              minRead             },  "total": count(*[_type == 'blog'            && defined(slug.current)            && (              (!defined($category))||              category->slug.current == $category            )])}
+// Query: {  "blogs": *[_type == 'blog'            && defined(slug.current)            && (              (!defined($category))              ||category->slug.current == $category            )]            | order(_id)            [$startIndex...$endIndex]{              title,              'slug': slug.current,              'author': author->name,              'authorImg': author->mainImage{alt, asset->{url}},              subtitle,              'category': category->name,              publishedAt,              'imageUrl': mainImage.asset->url,              'imageAlt': mainImage.alt,             },  "total": count(*[_type == 'blog'            && defined(slug.current)            && (              (!defined($category))||              category->slug.current == $category            )])}
 export type ALL_BLOGS_QUERYResult = {
   blogs: Array<{
     title: string | null;
@@ -435,10 +435,47 @@ export type ALL_BLOGS_QUERYResult = {
     publishedAt: string | null;
     imageUrl: string | null;
     imageAlt: string | null;
-    minRead: number | null;
   }>;
   total: number;
 };
+// Variable: BLOG_QUERY
+// Query: *[_type == 'blog' && slug.current == $slug][0]{  title,  "slug" : slug.current,  subtitle,  author->{    name,    "slug": slug.current,    "imageUrl": mainImage.asset->url,    "imageAlt": mainImage.alt,  },  category->{    name,    "slug": slug.current  },  publishedAt,  body,  "imageUrl": mainImage.asset->url,  "imageAlt": mainImage.alt,  minRead,  "relatedBlogs": *[_type == 'blog'                    && _id != ^._id                    && category->slug.current == ^.category->slug.current]{                       title,                        'slug': slug.current,                        'author': author->name,                        'authorImg': author->mainImage{alt, asset->{url}},                        subtitle,                        'category': category->name,                        publishedAt,                        'imageUrl': mainImage.asset->url,                        'imageAlt': mainImage.alt,                    } }
+export type BLOG_QUERYResult = {
+  title: string | null;
+  slug: string | null;
+  subtitle: string | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+    imageUrl: string | null;
+    imageAlt: string | null;
+  } | null;
+  category: {
+    name: string | null;
+    slug: string | null;
+  } | null;
+  publishedAt: string | null;
+  body: BlockContent | null;
+  imageUrl: string | null;
+  imageAlt: string | null;
+  minRead: number | null;
+  relatedBlogs: Array<{
+    title: string | null;
+    slug: string | null;
+    author: string | null;
+    authorImg: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    subtitle: string | null;
+    category: string | null;
+    publishedAt: string | null;
+    imageUrl: string | null;
+    imageAlt: string | null;
+  }>;
+} | null;
 // Variable: ALL_FAQS_QUERY
 // Query: *[_type == 'faq' && defined(slug.current)]{  name,  "slug": slug.current,  faqs[]{    question,    answer  } }
 export type ALL_FAQS_QUERYResult = Array<{
@@ -462,7 +499,8 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == \'product\'\n && defined(slug.current)]{\n  name,\n  slug,\n  price,\n  "imageUrl": mainImages[0].asset -> url,\n  "imageAlt": mainImages[0].alt,\n  "colors": availableColor[]->{name},\n  discountInPercent,\n  "brand": brand->name\n }\n ': ALL_PRODUCTS_QUERYResult;
     "*[_type == 'product'\n && slug.current == $slug][0]{\n  name,\n  slug,\n  sku,\n  'category': category->name,\n  price,\n  discountInPercent,\n  'colors': availableColor[]->name,\n  'sizes': availableSize[]->name,\n  mainImages[]{\n    asset->{url},\n    alt\n  },\n  body,\n }": PRODUCT_QUERYResult;
-    "\n {\n  \"blogs\": *[_type == 'blog'\n            && defined(slug.current)\n            && (\n              (!defined($category))\n              ||category->slug.current == $category\n            )]\n            | order(_id)\n            [$startIndex...$endIndex]{\n              title,\n              'slug': slug.current,\n              'author': author->name,\n              'authorImg': author->mainImage{alt, asset->{url}},\n              subtitle,\n              'category': category->name,\n              publishedAt,\n              'imageUrl': mainImage.asset->url,\n              'imageAlt': mainImage.alt,\n              minRead\n             },\n  \"total\": count(*[_type == 'blog'\n            && defined(slug.current)\n            && (\n              (!defined($category))||\n              category->slug.current == $category\n            )])\n}": ALL_BLOGS_QUERYResult;
+    "\n {\n  \"blogs\": *[_type == 'blog'\n            && defined(slug.current)\n            && (\n              (!defined($category))\n              ||category->slug.current == $category\n            )]\n            | order(_id)\n            [$startIndex...$endIndex]{\n              title,\n              'slug': slug.current,\n              'author': author->name,\n              'authorImg': author->mainImage{alt, asset->{url}},\n              subtitle,\n              'category': category->name,\n              publishedAt,\n              'imageUrl': mainImage.asset->url,\n              'imageAlt': mainImage.alt,\n             },\n  \"total\": count(*[_type == 'blog'\n            && defined(slug.current)\n            && (\n              (!defined($category))||\n              category->slug.current == $category\n            )])\n}": ALL_BLOGS_QUERYResult;
+    '*[_type == \'blog\'\n && slug.current == $slug][0]{\n  title,\n  "slug" : slug.current,\n  subtitle,\n  author->{\n    name,\n    "slug": slug.current,\n    "imageUrl": mainImage.asset->url,\n    "imageAlt": mainImage.alt,\n  },\n  category->{\n    name,\n    "slug": slug.current\n  },\n  publishedAt,\n  body,\n  "imageUrl": mainImage.asset->url,\n  "imageAlt": mainImage.alt,\n  minRead,\n  "relatedBlogs": *[_type == \'blog\'\n                    && _id != ^._id\n                    && category->slug.current == ^.category->slug.current]{\n                       title,\n                        \'slug\': slug.current,\n                        \'author\': author->name,\n                        \'authorImg\': author->mainImage{alt, asset->{url}},\n                        subtitle,\n                        \'category\': category->name,\n                        publishedAt,\n                        \'imageUrl\': mainImage.asset->url,\n                        \'imageAlt\': mainImage.alt,\n                    }\n }': BLOG_QUERYResult;
     '*[_type == \'faq\'\n && defined(slug.current)]{\n  name,\n  "slug": slug.current,\n  faqs[]{\n    question,\n    answer\n  }\n }': ALL_FAQS_QUERYResult;
     '*[_type == \'blogCategory\'\n && defined(slug.current)]{\n  name,\n  "slug" : slug.current\n }': ALL_BLOG_CATEGORIES_QUERYResult;
   }

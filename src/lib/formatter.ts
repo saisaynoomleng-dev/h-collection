@@ -35,3 +35,7 @@ export const formatDiscount = (discount: number, total: number) => {
   const newTotal = total - (total * discount) / 100;
   return formatPrice(newTotal);
 };
+
+export const formatDash = (text: string) => {
+  return `${text.replace(/-/g, ' ')}`;
+};

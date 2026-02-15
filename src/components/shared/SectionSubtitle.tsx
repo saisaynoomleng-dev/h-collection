@@ -7,7 +7,7 @@ const SectionSubtitle = ({
   as: Comp = 'h2',
 }: SectionSubtitleProps) => {
   return (
-    <div className={clsx('', className)}>
+    <div className={clsx('w-full', className)}>
       {/* desktop view */}
       <div className="hidden md:grid md:grid-cols-3 items-center">
         <div className="divider bg-brand-teal/50 w-[95%]"></div>

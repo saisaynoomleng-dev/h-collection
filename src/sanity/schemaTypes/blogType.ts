@@ -27,12 +27,7 @@ export const blogType = defineType({
       type: 'slug',
       validation: (rule) => rule.required(),
       options: {
-        source: (doc, context) =>
-          context.dataset === 'production'
-            ? `${doc.title}-${doc.publishedAt}`
-            : `${doc.title}`,
-        slugify: (input) =>
-          input.toLowerCase().replace(/\s+/g, '-').slice(0, 200),
+        source: 'title',
       },
     }),
     defineField({

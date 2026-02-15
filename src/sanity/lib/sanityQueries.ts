@@ -49,7 +49,6 @@ export const ALL_BLOGS_QUERY = defineQuery(`
               publishedAt,
               'imageUrl': mainImage.asset->url,
               'imageAlt': mainImage.alt,
-              minRead
              },
   "total": count(*[_type == 'blog'
             && defined(slug.current)
@@ -58,6 +57,41 @@ export const ALL_BLOGS_QUERY = defineQuery(`
               category->slug.current == $category
             )])
 }`);
+
+export const BLOG_QUERY = defineQuery(`*[_type == 'blog'
+ && slug.current == $slug][0]{
+  title,
+  "slug" : slug.current,
+  subtitle,
+  author->{
+    name,
+    "slug": slug.current,
+    "imageUrl": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
+  },
+  category->{
+    name,
+    "slug": slug.current
+  },
+  publishedAt,
+  body,
+  "imageUrl": mainImage.asset->url,
+  "imageAlt": mainImage.alt,
+  minRead,
+  "relatedBlogs": *[_type == 'blog'
+                    && _id != ^._id
+                    && category->slug.current == ^.category->slug.current]{
+                       title,
+                        'slug': slug.current,
+                        'author': author->name,
+                        'authorImg': author->mainImage{alt, asset->{url}},
+                        subtitle,
+                        'category': category->name,
+                        publishedAt,
+                        'imageUrl': mainImage.asset->url,
+                        'imageAlt': mainImage.alt,
+                    }
+ }`);
 
 export const ALL_FAQS_QUERY = defineQuery(`*[_type == 'faq'
  && defined(slug.current)]{
