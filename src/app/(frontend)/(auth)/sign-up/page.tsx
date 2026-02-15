@@ -177,13 +177,6 @@ const SignUpPage = () => {
               >
                 <BiLogoApple />
               </Button>
-
-              <div
-                id="clerk-captcha"
-                data-cl-theme="dark"
-                data-cl-size="flexible"
-                className="col-span-full"
-              />
             </div>
 
             <div className="flex col-span-full items-center">
@@ -339,6 +332,13 @@ const SignUpPage = () => {
             >
               Sign Up
             </button>
+
+            <p>
+              Already a member?{' '}
+              <Link href="/sign-in" className="underline">
+                Sign In
+              </Link>
+            </p>
           </form>
         )}
 
@@ -352,6 +352,13 @@ const SignUpPage = () => {
           />
         </div>
       </div>
+
+      <div
+        id="clerk-captcha"
+        data-cl-theme="dark"
+        data-cl-size="flexible"
+        className="col-span-full"
+      />
     </Bounded>
   );
 };
