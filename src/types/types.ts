@@ -22,7 +22,7 @@ export type BoundedProps = {
   as?: React.ElementType;
   children: React.ReactNode;
   className?: string;
-  isPadded: boolean;
+  isPadded?: boolean;
 };
 
 // CTA
