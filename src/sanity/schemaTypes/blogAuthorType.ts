@@ -40,6 +40,11 @@ export const blogAuthorType = defineType({
       type: 'blockContent',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'socialLink',
+      title: 'Socail Link',
+      type: 'string',
+    }),
   ],
   preview: {
     select: {
