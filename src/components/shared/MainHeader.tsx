@@ -61,8 +61,7 @@ const MainHeader = () => {
                 />
               </Link>
             ) : (
-              // <Link href="/sign-in">Sign In</Link>
-              <SignInButton />
+              <Link href="/sign-in">Sign In</Link>
             )}
           </div>
         </div>
