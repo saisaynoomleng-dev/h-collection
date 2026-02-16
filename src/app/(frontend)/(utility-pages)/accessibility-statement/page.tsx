@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 import { PortableText } from 'next-sanity';
 
 const params = {
-  slug: 'return-and-exchange-policy-utility-page',
+  slug: 'accessibility-statement-utility-page',
 };
 
 const { data: page } = await sanityFetch({ query: UTILITY_PAGE_QUERY, params });

@@ -53,7 +53,7 @@ const BlogDetailPage = async ({
 
   return (
     <Bounded isPadded>
-      <BackToPage>All Journals</BackToPage>
+      <BackToPage href="/blog">All Journals</BackToPage>
       <div className="flex flex-col gap-y-3 text-center">
         {category && <p>{category.name}</p>}
         <PageTitle>{title}</PageTitle>

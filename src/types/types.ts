@@ -94,4 +94,5 @@ export type PageTitleProps = {
 export type BackToPageProps = {
   children: React.ReactNode;
   className?: string;
+  href: string;
 };
