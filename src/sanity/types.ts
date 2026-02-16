@@ -510,6 +510,31 @@ export type ALL_AUTHORS_QUERYResult = {
   }>;
   total: number;
 };
+// Variable: AUTHOR_QUERY
+// Query: *[_type == 'author' && slug.current == $slug][0]{  name,  'imageUrl': mainImage.asset->url,  'imageAlt': mainImage.alt,  body,  socialLink,  "journals": *[_type == 'blog'               && author->slug.current == ^.slug.current]{                  title,                  'slug': slug.current,                  'author': author->name,                  'authorImg': author->mainImage{alt, asset->{url}},                  subtitle,                  'category': category->name,                  publishedAt,                  'imageUrl': mainImage.asset->url,                  'imageAlt': mainImage.alt,               } }
+export type AUTHOR_QUERYResult = {
+  name: string | null;
+  imageUrl: string | null;
+  imageAlt: string | null;
+  body: BlockContent | null;
+  socialLink: string | null;
+  journals: Array<{
+    title: string | null;
+    slug: string | null;
+    author: string | null;
+    authorImg: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    subtitle: string | null;
+    category: string | null;
+    publishedAt: string | null;
+    imageUrl: string | null;
+    imageAlt: string | null;
+  }>;
+} | null;
 
 // Query TypeMap
 import '@sanity/client';
@@ -523,5 +548,6 @@ declare module '@sanity/client' {
     '*[_type == \'blogCategory\'\n && defined(slug.current)]{\n  name,\n  "slug" : slug.current\n }': ALL_BLOG_CATEGORIES_QUERYResult;
     "*[_type == 'utilityPage'\n  && slug.current == $slug][0]{\n  name,\n  slug,\n  body\n}": UTILITY_PAGE_QUERYResult;
     '{\n  "authors": *[_type == \'author\'\n && defined(slug.current)]\n |order(_createdAt)\n [$startIndex...$endIndex]{\n  name,\n  "slug": slug.current,\n  "imageUrl": mainImage.asset->url,\n  "imageAlt": mainImage.alt\n },\n"total": count(*[_type == \'author\'\n && defined(slug.current)])\n}': ALL_AUTHORS_QUERYResult;
+    "*[_type == 'author'\n && slug.current == $slug][0]{\n  name,\n  'imageUrl': mainImage.asset->url,\n  'imageAlt': mainImage.alt,\n  body,\n  socialLink,\n  \"journals\": *[_type == 'blog'\n               && author->slug.current == ^.slug.current]{\n                  title,\n                  'slug': slug.current,\n                  'author': author->name,\n                  'authorImg': author->mainImage{alt, asset->{url}},\n                  subtitle,\n                  'category': category->name,\n                  publishedAt,\n                  'imageUrl': mainImage.asset->url,\n                  'imageAlt': mainImage.alt,\n               }\n }": AUTHOR_QUERYResult;
   }
 }

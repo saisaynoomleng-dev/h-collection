@@ -66,7 +66,7 @@ const AuthorPage = async ({
 
   return (
     <Bounded isPadded>
-      <PageTitle className="text-center">
+      <PageTitle className="text-center capitalize">
         All authors behind our Journals
       </PageTitle>
 
@@ -106,7 +106,11 @@ const AuthorPage = async ({
             {page === '...' ? (
               <span>...</span>
             ) : (
-              <Button asChild variant="faq">
+              <Button
+                asChild
+                variant="faq"
+                className={clsx(currentPage === page && 'bg-brand-pink')}
+              >
                 <Link
                   href={{
                     pathname: 'author',
