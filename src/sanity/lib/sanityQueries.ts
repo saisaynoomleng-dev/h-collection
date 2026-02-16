@@ -115,3 +115,17 @@ export const UTILITY_PAGE_QUERY = defineQuery(`*[_type == 'utilityPage'
   slug,
   body
 }`);
+
+export const ALL_AUTHORS_QUERY = defineQuery(`{
+  "authors": *[_type == 'author'
+ && defined(slug.current)]
+ |order(_createdAt)
+ [$startIndex...$endIndex]{
+  name,
+  "slug": slug.current,
+  "imageUrl": mainImage.asset->url,
+  "imageAlt": mainImage.alt
+ },
+"total": count(*[_type == 'author'
+ && defined(slug.current)])
+}`);

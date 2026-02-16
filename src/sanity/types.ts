@@ -493,10 +493,23 @@ export type ALL_BLOG_CATEGORIES_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: UTILITY_PAGE_QUERY
-// Query: *[_type == 'utilityPage'  && slug.current == $slug]{  body}
-export type UTILITY_PAGE_QUERYResult = Array<{
+// Query: *[_type == 'utilityPage'  && slug.current == $slug][0]{  name,  slug,  body}
+export type UTILITY_PAGE_QUERYResult = {
+  name: string | null;
+  slug: Slug | null;
   body: BlockContent | null;
-}>;
+} | null;
+// Variable: ALL_AUTHORS_QUERY
+// Query: {  "authors": *[_type == 'author' && defined(slug.current)] |order(_createdAt) [$startIndex...$endIndex]{  name,  "slug": slug.current,  "imageUrl": mainImage.asset->url,  "imageAlt": mainImage.alt },"total": count(*[_type == 'author' && defined(slug.current)])}
+export type ALL_AUTHORS_QUERYResult = {
+  authors: Array<{
+    name: string | null;
+    slug: string | null;
+    imageUrl: string | null;
+    imageAlt: string | null;
+  }>;
+  total: number;
+};
 
 // Query TypeMap
 import '@sanity/client';
@@ -508,6 +521,7 @@ declare module '@sanity/client' {
     '*[_type == \'blog\'\n && slug.current == $slug][0]{\n  title,\n  "slug" : slug.current,\n  subtitle,\n  author->{\n    name,\n    "slug": slug.current,\n    "imageUrl": mainImage.asset->url,\n    "imageAlt": mainImage.alt,\n  },\n  category->{\n    name,\n    "slug": slug.current\n  },\n  publishedAt,\n  body,\n  "imageUrl": mainImage.asset->url,\n  "imageAlt": mainImage.alt,\n  minRead,\n  "relatedBlogs": *[_type == \'blog\'\n                    && _id != ^._id\n                    && category->slug.current == ^.category->slug.current]{\n                       title,\n                        \'slug\': slug.current,\n                        \'author\': author->name,\n                        \'authorImg\': author->mainImage{alt, asset->{url}},\n                        subtitle,\n                        \'category\': category->name,\n                        publishedAt,\n                        \'imageUrl\': mainImage.asset->url,\n                        \'imageAlt\': mainImage.alt,\n                    }\n }': BLOG_QUERYResult;
     '*[_type == \'faq\'\n && defined(slug.current)]{\n  name,\n  "slug": slug.current,\n  faqs[]{\n    question,\n    answer\n  }\n }': ALL_FAQS_QUERYResult;
     '*[_type == \'blogCategory\'\n && defined(slug.current)]{\n  name,\n  "slug" : slug.current\n }': ALL_BLOG_CATEGORIES_QUERYResult;
-    "*[_type == 'utilityPage'\n  && slug.current == $slug]{\n  body\n}": UTILITY_PAGE_QUERYResult;
+    "*[_type == 'utilityPage'\n  && slug.current == $slug][0]{\n  name,\n  slug,\n  body\n}": UTILITY_PAGE_QUERYResult;
+    '{\n  "authors": *[_type == \'author\'\n && defined(slug.current)]\n |order(_createdAt)\n [$startIndex...$endIndex]{\n  name,\n  "slug": slug.current,\n  "imageUrl": mainImage.asset->url,\n  "imageAlt": mainImage.alt\n },\n"total": count(*[_type == \'author\'\n && defined(slug.current)])\n}': ALL_AUTHORS_QUERYResult;
   }
 }
