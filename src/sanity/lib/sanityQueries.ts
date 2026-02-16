@@ -108,3 +108,10 @@ export const ALL_BLOG_CATEGORIES_QUERY = defineQuery(`*[_type == 'blogCategory'
   name,
   "slug" : slug.current
  }`);
+
+export const UTILITY_PAGE_QUERY = defineQuery(`*[_type == 'utilityPage'
+  && slug.current == $slug][0]{
+  name,
+  slug,
+  body
+}`);

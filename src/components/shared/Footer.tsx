@@ -36,7 +36,10 @@ const SUPPORT_LINKS = [
 ];
 
 const UTILITY_LINKS = [
-  { name: 'Accessiblity Accessment', url: '/accessibility-accessment' },
+  {
+    name: 'Accessiblity Accessment',
+    url: '/accessibility-statement',
+  },
   { name: 'Payment Policy', url: '/payment-policy' },
   { name: 'Privacy Policy', url: '/privacy-policy' },
   { name: 'Return Policy', url: '/return-policy' },
