@@ -1,4 +1,5 @@
 import {
+  ALL_AUTHORS_QUERYResult,
   ALL_BLOGS_QUERYResult,
   ALL_FAQS_QUERYResult,
   ALL_PRODUCTS_QUERYResult,
@@ -95,4 +96,11 @@ export type BackToPageProps = {
   children: React.ReactNode;
   className?: string;
   href: string;
+};
+
+// Author Card
+export type AuthorCardProps = NonNullable<
+  ALL_AUTHORS_QUERYResult['authors']
+>[number] & {
+  className?: string;
 };

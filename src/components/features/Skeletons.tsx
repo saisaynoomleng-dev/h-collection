@@ -37,3 +37,13 @@ export const BlogCardSkeleton = () => {
     </div>
   );
 };
+
+// Author Card
+export const AuthorCardSkeleton = () => {
+  return (
+    <div className="space-y-3">
+      <Skeleton className="w-100 h-100" />
+      <Skeleton className="w-100 h-3" />
+    </div>
+  );
+};
