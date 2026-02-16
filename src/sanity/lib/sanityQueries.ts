@@ -129,3 +129,24 @@ export const ALL_AUTHORS_QUERY = defineQuery(`{
 "total": count(*[_type == 'author'
  && defined(slug.current)])
 }`);
+
+export const AUTHOR_QUERY = defineQuery(`*[_type == 'author'
+ && slug.current == $slug][0]{
+  name,
+  'imageUrl': mainImage.asset->url,
+  'imageAlt': mainImage.alt,
+  body,
+  socialLink,
+  "journals": *[_type == 'blog'
+               && author->slug.current == ^.slug.current]{
+                  title,
+                  'slug': slug.current,
+                  'author': author->name,
+                  'authorImg': author->mainImage{alt, asset->{url}},
+                  subtitle,
+                  'category': category->name,
+                  publishedAt,
+                  'imageUrl': mainImage.asset->url,
+                  'imageAlt': mainImage.alt,
+               }
+ }`);
