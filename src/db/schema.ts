@@ -29,6 +29,11 @@ export const userGender = t.pgEnum('userGender', [
   'female',
   'prefer-not-to-answer',
 ]);
+export const giftCardStatus = t.pgEnum('giftCardStatus', [
+  'used',
+  'expired',
+  'active',
+]);
 
 // Tables
 export const UserTable = t.pgTable(
@@ -177,6 +182,62 @@ export const ContactTable = t.pgTable('contacts', {
   ...timestamp,
 });
 
+export const GiftCardTable = t.pgTable('gift_cards', {
+  id: t.uuid('id').primaryKey().defaultRandom(),
+  amountInCents: t.integer('amount_in_cents').notNull(),
+  stripeCheckoutSessionId: t
+    .varchar('stripe_checkout_session_id', { length: 255 })
+    .unique(),
+  stripePaymentIntentId: t
+    .varchar('stripe_payment_intent_id', { length: 255 })
+    .unique(),
+  email: t.varchar('email', { length: 255 }).notNull(),
+  code: t.varchar('code', { length: 50 }).notNull(),
+  status: giftCardStatus('status').notNull().default('active'),
+  ...timestamp,
+});
+
+export const CareerTable = t.pgTable('careers', {
+  id: t.uuid('id').primaryKey().defaultRandom(),
+  position: t.varchar('position', { length: 255 }).notNull(),
+  body: t.text('body'),
+  isOpen: t.boolean('is_open').notNull().default(true),
+  ...timestamp,
+});
+
+export const ApplicationTable = t.pgTable(
+  'applications',
+  {
+    id: t.uuid('id').primaryKey().defaultRandom(),
+    firstName: t.varchar('first_name', { length: 255 }).notNull(),
+    lastName: t.varchar('last_name', { length: 255 }).notNull(),
+    email: t.varchar('email', { length: 255 }).notNull(),
+    positionId: t
+      .uuid('position_id')
+      .references(() => CareerTable.id, { onDelete: 'cascade' })
+      .notNull(),
+    resumeUrl: t.varchar('resume_url', { length: 255 }).notNull(),
+    ...timestamp,
+  },
+  (table) => [t.uniqueIndex('email_idx').on(table.email)],
+);
+
+export const PreviousEmployerTable = t.pgTable('previous_employer', {
+  id: t.uuid('id').primaryKey().defaultRandom(),
+  applicationId: t
+    .uuid('application_id')
+    .references(() => ApplicationTable.id, { onDelete: 'cascade' })
+    .notNull(),
+  employerName: t.varchar('employer_name', { length: 255 }).notNull(),
+  employerEmail: t.varchar('employer_email', { length: 255 }).notNull(),
+  employerPhone: t.varchar('employer_phone', { length: 255 }),
+  previousPosition: t.varchar('previous_position', { length: 255 }).notNull(),
+  reasonForLeaving: t.text('reason_for_leaving').notNull(),
+  startDate: t.timestamp('start_date', { withTimezone: true }).notNull(),
+  endDate: t.timestamp('end_date', { withTimezone: true }),
+  ...timestamp,
+});
+
 // relations
 export const UserTableRelations = relations(UserTable, ({ many }) => ({
   addresses: many(AddressTable),
@@ -224,4 +285,29 @@ export const ReviewTableRelations = relations(ReviewTable, ({ one }) => ({
     fields: [ReviewTable.productId],
     references: [ProductTable.id],
   }),
+}));
+
+export const ApplicationTableRelations = relations(
+  ApplicationTable,
+  ({ one, many }) => ({
+    previousEmployers: many(PreviousEmployerTable),
+    career: one(CareerTable, {
+      fields: [ApplicationTable.positionId],
+      references: [CareerTable.id],
+    }),
+  }),
+);
+
+export const PreviousEmployerTableRelations = relations(
+  PreviousEmployerTable,
+  ({ one }) => ({
+    application: one(ApplicationTable, {
+      fields: [PreviousEmployerTable.applicationId],
+      references: [ApplicationTable.id],
+    }),
+  }),
+);
+
+export const CareerTableRelations = relations(CareerTable, ({ many }) => ({
+  applications: many(ApplicationTable),
 }));
