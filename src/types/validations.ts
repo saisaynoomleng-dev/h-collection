@@ -47,3 +47,19 @@ export const clerkDataSchema = z.object({
   image_url: z.string(),
   primary_email_address_id: z.string(),
 });
+
+export const applicationFormSchema = z.object({
+  firstName: z.string().min(1, 'Name must have at least one characters'),
+  lastName: z.string().min(1, 'Name must have at least one characters'),
+  email: z.email(),
+  positionId: z.string(),
+  positionName: z.string(),
+  employerName: z.string(),
+  employerEmail: z.email(),
+  employerPhone: z.string().nullable(),
+  previousPosition: z.string(),
+  startDate: z.date(),
+  endDate: z.date().nullable(),
+  reasonForLeaving: z.string(),
+  resumeUrl: z.string().nullable(),
+});

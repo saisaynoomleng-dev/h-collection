@@ -1,4 +1,4 @@
-import { JobCardSkeleton } from '@/components/features/Skeletons';
+import { JobCardSkeleton } from '@/components/shared/Skeletons';
 import Bounded from '@/components/shared/Bounded';
 import JobCard from '@/components/shared/JobCard';
 import PageTitle from '@/components/shared/PageTitle';

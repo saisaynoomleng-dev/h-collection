@@ -1,5 +1,5 @@
 import BlogCard from '@/components/features/BlogCard';
-import { BlogCardSkeleton } from '@/components/features/Skeletons';
+import { BlogCardSkeleton } from '@/components/shared/Skeletons';
 import BackToPage from '@/components/shared/BackToPage';
 import Bounded from '@/components/shared/Bounded';
 import SanityImage from '@/components/shared/SanityImage';
