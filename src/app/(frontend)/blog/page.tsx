@@ -1,5 +1,5 @@
 import BlogCard from '@/components/features/BlogCard';
-import { BlogCardSkeleton } from '@/components/features/Skeletons';
+import { BlogCardSkeleton } from '@/components/shared/Skeletons';
 import Bounded from '@/components/shared/Bounded';
 import PageTitle from '@/components/shared/PageTitle';
 import { Button } from '@/components/ui/button';

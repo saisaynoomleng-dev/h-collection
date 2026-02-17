@@ -1,4 +1,4 @@
-import { AuthorCardSkeleton } from '@/components/features/Skeletons';
+import { AuthorCardSkeleton } from '@/components/shared/Skeletons';
 import AuthorCard from '@/components/shared/AuthorCard';
 import Bounded from '@/components/shared/Bounded';
 import PageTitle from '@/components/shared/PageTitle';

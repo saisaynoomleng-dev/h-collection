@@ -212,11 +212,12 @@ export const ApplicationTable = t.pgTable(
     firstName: t.varchar('first_name', { length: 255 }).notNull(),
     lastName: t.varchar('last_name', { length: 255 }).notNull(),
     email: t.varchar('email', { length: 255 }).notNull(),
+    positionName: t.varchar('position_name', { length: 255 }).notNull(),
     positionId: t
       .uuid('position_id')
       .references(() => CareerTable.id, { onDelete: 'cascade' })
       .notNull(),
-    resumeUrl: t.varchar('resume_url', { length: 255 }).notNull(),
+    resumeUrl: t.varchar('resume_url', { length: 255 }),
     ...timestamp,
   },
   (table) => [t.uniqueIndex('email_idx').on(table.email)],

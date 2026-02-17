@@ -105,3 +105,10 @@ export type AuthorCardProps = NonNullable<
 >[number] & {
   className?: string;
 };
+
+// Application Form Prev State
+export type ApplicationFormPrevStateProps = {
+  status: string;
+  message: string;
+  field?: string;
+};
