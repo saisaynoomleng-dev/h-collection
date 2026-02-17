@@ -22,24 +22,25 @@ export const metadata: Metadata = {
 };
 
 const getPaginationRange = (currentPage: number, totalPage: number) => {
-  const delta = 2;
-  const range = [];
-
+  const delta = 1;
+  const range = new Set<number | string>();
   for (
-    let i = Math.max(2, currentPage - delta);
-    i <= Math.min(totalPage - 1, currentPage + delta);
+    let i = Math.max(1, currentPage - delta);
+    i <= Math.min(totalPage, currentPage + delta);
     i++
   ) {
-    range.push(i);
+    range.add(i);
   }
 
-  if (currentPage - delta > 2) range.unshift('...');
-  if (currentPage + delta < totalPage - 1) range.push('...');
+  const result: (number | string)[] = Array.from(range);
 
-  range.unshift(1);
-  if (totalPage > 1) range.push(totalPage);
+  if (currentPage - delta > 2) result.unshift('...');
+  if (currentPage + delta < totalPage - 1) result.push('...');
 
-  return range;
+  if (!result.includes(1)) result.unshift(1);
+  if (totalPage > 1 && !result.includes(totalPage)) result.push(totalPage);
+
+  return result;
 };
 
 const BlogPage = async ({

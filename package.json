@@ -10,7 +10,8 @@
     "sanity:typegen": "sanity schema extract --path=./src/sanity/extract.json && sanity typegen generate",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "email": "email dev"
+    "email": "email dev",
+    "db:seed": "tsx ./src/db/seed.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.37.4",

@@ -1,3 +1,4 @@
+import { CareerTable } from '@/db/schema';
 import {
   ALL_AUTHORS_QUERYResult,
   ALL_BLOGS_QUERYResult,

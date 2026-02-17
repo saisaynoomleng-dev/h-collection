@@ -43,3 +43,5 @@
 - user can subscribe to newsletter and get instant email reply
 - user can contact with email for franchising, wholesale order, and be a supplier
 - user can filter blogs by category
+- user can find see author detail page and check their journals
+- user can apply for jobs on career page by filtering out the careers

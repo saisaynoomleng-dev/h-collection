@@ -96,7 +96,7 @@ const BlogDetailPage = async ({
         <div className="space-y-3">
           <SectionSubtitle>Related Journals</SectionSubtitle>
 
-          <div className="flex gap-x-3 overflow-x-scroll">
+          <div className="flex gap-x-3 overflow-x-scroll py-3 px-5">
             {blog.relatedBlogs.map((blog) => (
               <BlogCard key={blog.slug} {...blog} />
             ))}

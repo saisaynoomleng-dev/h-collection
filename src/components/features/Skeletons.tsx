@@ -47,3 +47,17 @@ export const AuthorCardSkeleton = () => {
     </div>
   );
 };
+
+// Job Card
+export const JobCardSkeleton = () => {
+  return (
+    <div className="max-md:110 md:max-w-150 space-y-3">
+      <div className="flex justify-between items-center">
+        <Skeleton className="w-80 h-3" />
+        <Skeleton className="w-30 h-3" />
+      </div>
+      <Skeleton className="w-150 h-3" />
+      <Skeleton className="w-150 h-3" />
+    </div>
+  );
+};
