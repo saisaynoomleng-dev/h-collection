@@ -1,5 +1,6 @@
 import { BiCategory } from 'react-icons/bi';
 import { BsNewspaper } from 'react-icons/bs';
+import { CiGift } from 'react-icons/ci';
 import { FaUserEdit } from 'react-icons/fa';
 import { IoIosColorPalette, IoIosResize, IoIosShirt } from 'react-icons/io';
 import { IoPencilSharp } from 'react-icons/io5';
@@ -34,6 +35,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('utilityPage')
         .title('Utility Pages')
         .icon(TiDocumentText),
+      S.documentTypeListItem('giftCard').title('Gift Cards').icon(CiGift),
 
       S.divider().title('Marketing'),
       S.documentTypeListItem('blogCategory')

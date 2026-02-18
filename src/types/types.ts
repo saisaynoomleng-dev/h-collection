@@ -112,3 +112,10 @@ export type ApplicationFormPrevStateProps = {
   message: string;
   field?: string;
 };
+
+// Giftcard Form Prev State
+export type FormPrevStateProps = {
+  status: string;
+  message: string;
+  field?: string;
+};

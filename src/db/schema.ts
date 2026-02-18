@@ -29,7 +29,7 @@ export const userGender = t.pgEnum('userGender', [
   'female',
   'prefer-not-to-answer',
 ]);
-export const giftCardStatus = t.pgEnum('giftCardStatus', [
+export const giftCardStatusEnum = t.pgEnum('giftCardStatus', [
   'used',
   'expired',
   'active',
@@ -184,6 +184,16 @@ export const ContactTable = t.pgTable('contacts', {
 
 export const GiftCardTable = t.pgTable('gift_cards', {
   id: t.uuid('id').primaryKey().defaultRandom(),
+  name: t.varchar('name').notNull(),
+  sanityId: t.varchar('sanity_id').notNull().unique(),
+  sanitySlug: t.varchar('sanity_slug').notNull(),
+  amountInCents: t.integer('amount_in_cents').notNull(),
+  isDeleted: t.boolean('is_deleted').notNull().default(false),
+  ...timestamp,
+});
+
+export const GiftCardOrderTable = t.pgTable('gift_card_orders', {
+  id: t.uuid('id').primaryKey().defaultRandom(),
   amountInCents: t.integer('amount_in_cents').notNull(),
   stripeCheckoutSessionId: t
     .varchar('stripe_checkout_session_id', { length: 255 })
@@ -193,7 +203,7 @@ export const GiftCardTable = t.pgTable('gift_cards', {
     .unique(),
   email: t.varchar('email', { length: 255 }).notNull(),
   code: t.varchar('code', { length: 50 }).notNull(),
-  status: giftCardStatus('status').notNull().default('active'),
+  status: giftCardStatusEnum('status').notNull().default('active'),
   ...timestamp,
 });
 
@@ -311,4 +321,8 @@ export const PreviousEmployerTableRelations = relations(
 
 export const CareerTableRelations = relations(CareerTable, ({ many }) => ({
   applications: many(ApplicationTable),
+}));
+
+export const GiftCardTableRelations = relations(GiftCardTable, ({ many }) => ({
+  orders: many(GiftCardOrderTable),
 }));

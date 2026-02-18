@@ -12,6 +12,7 @@ import { utilityPageType } from './utilityPageType';
 import { blogCategoryType } from './blogCategoryType';
 import { blogAuthorType } from './blogAuthorType';
 import { blogType } from './blogType';
+import { giftCardType } from './giftCardType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -28,5 +29,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     blogCategoryType,
     blogAuthorType,
     blogType,
+    giftCardType,
   ],
 };

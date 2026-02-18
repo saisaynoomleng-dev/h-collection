@@ -63,3 +63,17 @@ export const applicationFormSchema = z.object({
   reasonForLeaving: z.string(),
   resumeUrl: z.string().nullable(),
 });
+
+export const sanityGiftCardWebhookPayload = z.object({
+  name: z.string(),
+  slug: z.object({
+    current: z.string(),
+  }),
+  _id: z.string(),
+  amount: z.number(),
+});
+
+export const giftCardCheckoutSchema = z.object({
+  email: z.email(),
+  amount: z.coerce.number(),
+});
