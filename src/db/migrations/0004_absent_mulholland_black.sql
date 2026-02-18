@@ -1,1 +1,0 @@
-ALTER TABLE "applications" ADD COLUMN "position_name" varchar(255) NOT NULL;

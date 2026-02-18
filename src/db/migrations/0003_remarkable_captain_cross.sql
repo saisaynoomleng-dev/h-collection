@@ -1,1 +1,0 @@
-ALTER TABLE "applications" ALTER COLUMN "resume_url" DROP NOT NULL;

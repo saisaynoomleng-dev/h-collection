@@ -11,6 +11,9 @@ export const env = createEnv({
     DATABASE_URL: z.string(),
     SANITY_WEBHOOK_SECRET: z.string(),
     RESEND_API_KEY: z.string(),
+    SANITY_WEBHOOK_GIFTCARD_SECRET: z.string(),
+    STRIPE_SECRET_KEY: z.string(),
+    STRIPE_GIFTCARD_WEBHOOK_SECRET: z.string(),
   },
   experimental__runtimeEnv: process.env,
 });

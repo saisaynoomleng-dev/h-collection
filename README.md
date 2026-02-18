@@ -45,3 +45,4 @@
 - user can filter blogs by category
 - user can find see author detail page and check their journals
 - user can apply for jobs on career page by filtering out the careers
+- user can buy a gift card and use it later
